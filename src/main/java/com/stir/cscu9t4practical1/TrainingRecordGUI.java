@@ -9,137 +9,172 @@ import java.lang.Number;
 
 public class TrainingRecordGUI extends JFrame implements ActionListener {
 
-    private JTextField name = new JTextField(30);
-    private JTextField day = new JTextField(2);
-    private JTextField month = new JTextField(2);
-    private JTextField year = new JTextField(4);
-    private JTextField hours = new JTextField(2);
-    private JTextField mins = new JTextField(2);
-    private JTextField secs = new JTextField(2);
-    private JTextField dist = new JTextField(4);
-    private JLabel labn = new JLabel(" Name:");
-    private JLabel labd = new JLabel(" Day:");
-    private JLabel labm = new JLabel(" Month:");
-    private JLabel laby = new JLabel(" Year:");
-    private JLabel labh = new JLabel(" Hours:");
-    private JLabel labmm = new JLabel(" Mins:");
-    private JLabel labs = new JLabel(" Secs:");
-    private JLabel labdist = new JLabel(" Distance (km):");
-    private JButton addR = new JButton("Add");
-    private JButton lookUpByDate = new JButton("Look Up");
+	private static final Component RemoveEntry = null;
+	private JTextField name = new JTextField(30);
+	private JTextField day = new JTextField(2);
+	private JTextField month = new JTextField(2);
+	private JTextField year = new JTextField(4);
+	private JTextField hours = new JTextField(2);
+	private JTextField mins = new JTextField(2);
+	private JTextField secs = new JTextField(2);
+	private JTextField dist = new JTextField(4);
 
-    private TrainingRecord myAthletes = new TrainingRecord();
+	private JLabel labn = new JLabel(" Name:");
+	private JLabel labd = new JLabel(" Day:");
+	private JLabel labm = new JLabel(" Month:");
+	private JLabel laby = new JLabel(" Year:");
+	private JLabel labh = new JLabel(" Hours:");
+	private JLabel labmm = new JLabel(" Mins:");
+	private JLabel labs = new JLabel(" Secs:");
+	private JLabel labdist = new JLabel(" Distance (km):");
+	private JButton addR = new JButton("Add");
+	private JButton lookUpByDate = new JButton("Look Up");
+	private JButton lookallEntry = new JButton("Look All");
+	private JButton removeEntry = new JButton("Remove");
 
-    private JTextArea outputArea = new JTextArea(5, 50);
+	private TrainingRecord myAthletes = new TrainingRecord();
 
-    public static void main(String[] args) {
-        TrainingRecordGUI applic = new TrainingRecordGUI();
-    } // main
+	private JTextArea outputArea = new JTextArea(5, 50);
 
-    // set up the GUI 
-    public TrainingRecordGUI() {
-        super("Training Record");
-        setLayout(new FlowLayout());
-        add(labn);
-        add(name);
-        name.setEditable(true);
-        add(labd);
-        add(day);
-        day.setEditable(true);
-        add(labm);
-        add(month);
-        month.setEditable(true);
-        add(laby);
-        add(year);
-        year.setEditable(true);
-        add(labh);
-        add(hours);
-        hours.setEditable(true);
-        add(labmm);
-        add(mins);
-        mins.setEditable(true);
-        add(labs);
-        add(secs);
-        secs.setEditable(true);
-        add(labdist);
-        add(dist);
-        dist.setEditable(true);
-        add(addR);
-        addR.addActionListener(this);
-        add(lookUpByDate);
-        lookUpByDate.addActionListener(this);
-        add(outputArea);
-        outputArea.setEditable(false);
-        setSize(720, 200);
-        setVisible(true);
-        blankDisplay();
+	public static void main(String[] args) {
+		TrainingRecordGUI applic = new TrainingRecordGUI();
 
-        // To save typing in new entries while testing, uncomment
-        // the following lines (or add your own test cases)
-        
-    } // constructor
+	}
 
-    // listen for and respond to GUI events 
-    public void actionPerformed(ActionEvent event) {
-        String message = "";
-        if (event.getSource() == addR) {
-            message = addEntry("generic");
-        }
-        if (event.getSource() == lookUpByDate) {
-            message = lookupEntry();
-        }
-        outputArea.setText(message);
-        blankDisplay();
-    } // actionPerformed
+	// set up the GUI
+	public TrainingRecordGUI() {
+		super("Training Record");
+		setLayout(new FlowLayout());
+		add(labn);
+		add(name);
+		name.setEditable(true);
+		add(labd);
+		add(day);
+		day.setEditable(true);
+		add(labm);
+		add(month);
+		month.setEditable(true);
+		add(laby);
+		add(year);
+		year.setEditable(true);
+		add(labh);
+		add(hours);
+		hours.setEditable(true);
+		add(labmm);
+		add(mins);
+		mins.setEditable(true);
+		add(labs);
+		add(secs);
+		secs.setEditable(true);
+		add(labdist);
+		add(dist);
+		dist.setEditable(true);
+		add(addR);
+		addR.addActionListener(this);
 
-    public String addEntry(String what) {
-        String message = "Record added\n";
-        System.out.println("Adding "+what+" entry to the records");
-        String n = name.getText();
-        int m = Integer.parseInt(month.getText());
-        int d = Integer.parseInt(day.getText());
-        int y = Integer.parseInt(year.getText());
-        float km = java.lang.Float.parseFloat(dist.getText());
-        int h = Integer.parseInt(hours.getText());
-        int mm = Integer.parseInt(mins.getText());
-        int s = Integer.parseInt(secs.getText());
-        Entry e = new Entry(n, d, m, y, h, mm, s, km);
-        myAthletes.addEntry(e);
-        return message;
-    }
-    
-       
-    public String lookupEntry() {
-        int m = Integer.parseInt(month.getText());
-        int d = Integer.parseInt(day.getText());
-        int y = Integer.parseInt(year.getText());
-        outputArea.setText("looking up record ...");
-        String message = myAthletes.lookupEntry(d, m, y);
-        return message;
-    }
+		add(lookUpByDate);
+		lookUpByDate.addActionListener(this);
+		add(lookallEntry);
+		lookallEntry.addActionListener(this);
+		add(removeEntry);
+		removeEntry.addActionListener(this);
 
-    public void blankDisplay() {
-        name.setText("");
-        day.setText("");
-        month.setText("");
-        year.setText("");
-        hours.setText("");
-        mins.setText("");
-        secs.setText("");
-        dist.setText("");
+		add(outputArea);
+		outputArea.setEditable(false);
+		setSize(720, 200);
+		setVisible(true);
+		blankDisplay();
 
-    }// blankDisplay
-    // Fills the input fields on the display for testing purposes only
-    public void fillDisplay(Entry ent) {
-        name.setText(ent.getName());
-        day.setText(String.valueOf(ent.getDay()));
-        month.setText(String.valueOf(ent.getMonth()));
-        year.setText(String.valueOf(ent.getYear()));
-        hours.setText(String.valueOf(ent.getHour()));
-        mins.setText(String.valueOf(ent.getMin()));
-        secs.setText(String.valueOf(ent.getSec()));
-        dist.setText(String.valueOf(ent.getDistance()));
-    }
+		// To save typing in new entries while testing, uncomment
+		// the following lines (or add your own test cases)
 
-} // TrainingRecordGUI
+	} // constructor
 
+	// listen for and respond to GUI events
+	public void actionPerformed(ActionEvent event) {
+		String message = "";
+		if (event.getSource() == addR) {
+			message = addEntry("generic");
+		}
+		if (event.getSource() == lookUpByDate) {
+			message = lookupEntry();
+		}
+		if (event.getSource() == lookallEntry) {
+			message = lookallEntry();
+		}
+		if (event.getSource() == removeEntry) {
+			message = removeEntry();
+		}
+		outputArea.setText(message);
+		blankDisplay();
+	} // actionPerformed
+
+	public String addEntry(String what) {
+		String message = "Record added\n";
+		System.out.println("Adding " + what + " entry to the records");
+		String n = name.getText();
+		int m = Integer.parseInt(month.getText());
+		int d = Integer.parseInt(day.getText());
+		int y = Integer.parseInt(year.getText());
+		float km = java.lang.Float.parseFloat(dist.getText());
+		int h = Integer.parseInt(hours.getText());
+		int mm = Integer.parseInt(mins.getText());
+		int s = Integer.parseInt(secs.getText());
+		Entry e = new Entry(n, d, m, y, h, mm, s, km);
+		myAthletes.addEntry(e);
+		return message;
+	}
+
+	public String lookupEntry() {
+		int m = Integer.parseInt(month.getText());
+		int d = Integer.parseInt(day.getText());
+		int y = Integer.parseInt(year.getText());
+		outputArea.setText("looking up record ...");
+		String message = myAthletes.lookupEntry(d, m, y);
+		return message;
+	}
+
+	public String lookallEntry() {
+		int m = Integer.parseInt(month.getText());
+		int d = Integer.parseInt(day.getText());
+		int y = Integer.parseInt(year.getText());
+		outputArea.setText("looking all record ...");
+		String message = myAthletes.lookallEntry(d, m, y);
+		return message;
+	}
+
+	public String removeEntry() {
+		String n = name.getText();
+		int m = Integer.parseInt(month.getText());
+		int d = Integer.parseInt(day.getText());
+		int y = Integer.parseInt(year.getText());
+		outputArea.setText("Take out files...");
+		String message = myAthletes.RemoveEntry(n, d, m, y);
+		return message;
+	}
+
+	public void blankDisplay() {
+		name.setText("");
+		day.setText("");
+		month.setText("");
+		year.setText("");
+		hours.setText("");
+		mins.setText("");
+		secs.setText("");
+		dist.setText("");
+
+	}
+
+	// Fills the input fields on the display for testing purposes only
+	public void fillDisplay(Entry ent) {
+		name.setText(ent.getName());
+		day.setText(String.valueOf(ent.getDay()));
+		month.setText(String.valueOf(ent.getMonth()));
+		year.setText(String.valueOf(ent.getYear()));
+		hours.setText(String.valueOf(ent.getHour()));
+		mins.setText(String.valueOf(ent.getMin()));
+		secs.setText(String.valueOf(ent.getSec()));
+		dist.setText(String.valueOf(ent.getDistance()));
+	}
+
+}

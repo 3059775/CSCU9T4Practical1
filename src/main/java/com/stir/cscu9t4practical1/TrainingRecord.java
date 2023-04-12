@@ -31,6 +31,30 @@ public class TrainingRecord {
        return result;
    } // lookupEntry
    
+
+   public String lookallEntry (int d, int m, int y) {
+       ListIterator<Entry> iter = tr.listIterator();
+       String result = "No entries found";
+       while (iter.hasNext()) {
+          Entry current = iter.next();
+          if (current.getDay()==d && current.getMonth()==m && current.getYear()==y) 
+             result = current.getEntry();
+            }
+       return result;
+   } 
+  
+
+   public String removeEntry (String n,int d, int m, int y) {
+       ListIterator<Entry> iter = tr.listIterator();
+       String result = "No entries found";
+       while (iter.hasNext()) {
+          Entry current = iter.next();
+          if (current.getDay()==d && current.getMonth()==m && current.getYear()==y) 
+             result = current.getEntry();
+            }
+       return result;
+   } 
+   
    
   
    public int getNumberOfEntries(){
@@ -40,5 +64,10 @@ public class TrainingRecord {
    public void clearAllEntries(){
        tr.clear();
    }
+
+public String RemoveEntry(String n, int d, int m, int y) {
+	// TODO Auto-generated method stub
+	return null;
+}
    
 } // TrainingRecord
